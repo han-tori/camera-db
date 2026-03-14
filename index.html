@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📷 My Camera Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0b;
+  --surface: #141416;
+  --surface2: #1c1c20;
+  --border: #2a2a30;
+  --text: #e8e8ed;
+  --text2: #8a8a95;
+  --accent-film: #e8a44a;
+  --accent-digital: #4a9de8;
+  --accent-lens: #9b6de8;
+  --red: #e85454;
+  --green: #54e88a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'IBM Plex Sans KR', 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  padding: 40px 32px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.header h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.header h1 span { opacity: 0.4; font-weight: 400; margin-left: 8px; font-size: 1rem; }
+.header p { color: var(--text2); margin-top: 6px; font-size: 0.9rem; }
+
+/* Stats bar */
+.stats {
+  display: flex; gap: 24px;
+  padding: 16px 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.stat {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; color: var(--text2);
+}
+.stat .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.stat .count { font-weight: 600; color: var(--text); }
+
+/* Tabs */
+.tabs {
+  display: flex; gap: 4px;
+  padding: 0 32px;
+  max-width: 1400px;
+  margin: 16px auto;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--text); border-bottom-color: var(--text); }
+.tab .badge {
+  display: inline-block;
+  background: var(--surface2);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 0.75rem;
+  margin-left: 6px;
+}
+
+/* Search */
+.search-bar {
+  padding: 16px 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.search-bar input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  font-family: inherit;
+}
+.search-bar input::placeholder { color: var(--text2); }
+.search-bar input:focus { border-color: var(--text2); }
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 8px 32px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+}
+.card:hover {
+  border-color: var(--text2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.card .type-indicator {
+  position: absolute;
+  top: 0; left: 20px;
+  width: 32px; height: 3px;
+  border-radius: 0 0 3px 3px;
+}
+.card.film .type-indicator { background: var(--accent-film); }
+.card.digital .type-indicator { background: var(--accent-digital); }
+.card.lens .type-indicator { background: var(--accent-lens); }
+
+.card .brand {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text2);
+  margin-bottom: 4px;
+}
+.card .model-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.card .tag-row {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.tag {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.tag.film { background: rgba(232,164,74,0.15); color: var(--accent-film); }
+.tag.digital { background: rgba(74,157,232,0.15); color: var(--accent-digital); }
+.tag.lens { background: rgba(155,109,232,0.15); color: var(--accent-lens); }
+.tag.mount { background: var(--surface2); color: var(--text2); }
+.tag.owned { background: rgba(84,232,138,0.15); color: var(--green); }
+
+.card .specs-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+.card .spec-item { color: var(--text2); }
+.card .spec-item strong { color: var(--text); font-weight: 500; }
+
+/* Modal Overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  overflow-y: auto;
+  padding: 40px 20px;
+}
+.modal-overlay.open { display: flex; justify-content: center; align-items: flex-start; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  max-width: 640px;
+  width: 100%;
+  padding: 32px;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+.modal .close-btn {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal .close-btn:hover { color: var(--text); border-color: var(--text2); }
+
+.modal .modal-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.modal .modal-brand {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text2);
+}
+.modal .modal-model {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 4px 0 12px;
+}
+.modal .modal-tags {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.modal .modal-note {
+  font-size: 0.85rem;
+  color: var(--text2);
+  margin-top: 8px;
+  font-style: italic;
+}
+.modal .spec-section {
+  margin-bottom: 20px;
+}
+.modal .spec-section h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text2);
+  margin-bottom: 10px;
+}
+.modal .spec-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 6px 12px;
+  font-size: 0.85rem;
+}
+.modal .spec-label { color: var(--text2); }
+.modal .spec-value { color: var(--text); font-weight: 400; }
+.modal .spec-value.highlight { color: var(--green); font-weight: 500; }
+.modal .spec-value.warn { color: var(--red); font-weight: 500; }
+
+/* Compare bar */
+.compare-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 16px 32px;
+  display: none;
+  align-items: center;
+  gap: 16px;
+  z-index: 90;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+}
+.compare-bar.show { display: flex; }
+.compare-bar .selected-items { display: flex; gap: 8px; flex: 1; }
+.compare-bar .selected-chip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  display: flex; align-items: center; gap: 6px;
+}
+.compare-bar .selected-chip .remove {
+  cursor: pointer; opacity: 0.5; font-size: 0.7rem;
+}
+.compare-bar .selected-chip .remove:hover { opacity: 1; }
+.compare-bar .compare-btn {
+  background: var(--accent-digital);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.compare-bar .compare-btn:disabled { opacity: 0.4; cursor: default; }
+.compare-bar .compare-btn:not(:disabled):hover { filter: brightness(1.1); }
+
+.card .compare-check {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+  z-index: 2;
+}
+.card .compare-check:hover { border-color: var(--accent-digital); }
+.card .compare-check.checked {
+  background: var(--accent-digital);
+  border-color: var(--accent-digital);
+  color: #fff;
+}
+
+/* Compare modal */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 16px;
+}
+.compare-table th {
+  text-align: left;
+  padding: 8px 10px;
+  color: var(--text2);
+  font-weight: 400;
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.compare-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.compare-table td.better { color: var(--green); font-weight: 500; }
+.compare-table .model-header {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .header { padding: 24px 16px 16px; }
+  .header h1 { font-size: 1.6rem; }
+  .stats, .tabs, .search-bar, .grid { padding-left: 16px; padding-right: 16px; }
+  .grid { grid-template-columns: 1fr; }
+  .modal { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📷 My Camera Collection <span>by 한토리</span></h1>
+  <p>카메라 & 렌즈 스펙 데이터베이스</p>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="tabs" id="tabs">
+  <div class="tab active" data-filter="all">전체 <span class="badge" id="count-all"></span></div>
+  <div class="tab" data-filter="film">🎞️ 필름 <span class="badge" id="count-film"></span></div>
+  <div class="tab" data-filter="digital">🖥️ 디지털 <span class="badge" id="count-digital"></span></div>
+  <div class="tab" data-filter="lens">🔭 렌즈 <span class="badge" id="count-lens"></span></div>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="검색 — 브랜드, 모델명, 마운트...">
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="compare-bar" id="compare-bar">
+  <div class="selected-items" id="selected-items"></div>
+  <button class="compare-btn" id="compare-btn" disabled onclick="showCompare()">비교하기</button>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+// ── DATA ──
+const DATA = {"cameras":[{"id":"nikon-zf","brand":"Nikon","model":"Zf","type":"digital","subtype":"미러리스","mount":"Nikon Z","sensor":"35mm 풀프레임 (FX)","resolution":"24.5MP","sensorType":"CMOS BSI","processor":"EXPEED 7","af":"하이브리드 AF (위상차+콘트라스트), 299포인트","afFeatures":"피사체 인식 AF (인물, 동물, 차량 등)","shutter":"기계식 + 전자식","shutterSpeed":"1/8000s ~ 900s (기계식 1/8000~30s)","flashSync":"1/200s","iso":"100~64000 (확장 50~128000)","metering":"TTL 측광, 3D 컬러 매트릭스 III","viewfinder":"EVF 0.5인치 OLED, 369만 도트","vfMagnification":"0.8x","display":"3.2인치 바리앵글 TFT, 210만 도트","burst":"14fps (전자식), 7.3fps (기계식)","video":"4K 60p, 1080p 120p","stabilization":"센서 시프트 VR 5축 (최대 8스톱)","storage":"SD (UHS-II) + microSD","battery":"EN-EL15c, 약 380매 (EVF)","bodyMaterial":"마그네슘 합금 상판, 레트로 다이얼","weatherSeal":"방진방적","dimensions":"144 x 103 x 49mm","weight":"710g (바디 only)","released":"2023-09","msrp":"₩2,699,000","owned":true,"notes":"레트로 디자인 풀프레임 미러리스. FM2 오마주.","usedPrice":"₩200~230만","priceRange":"200~230만원","priceNote":"인기 높아 중고가 유지","priceDate":"2025-03"},{"id":"fuji-xt5","brand":"Fujifilm","model":"X-T5","type":"digital","subtype":"미러리스","mount":"Fujifilm X","sensor":"APS-C (23.5 x 15.7mm)","resolution":"40.2MP","sensorType":"X-Trans CMOS 5 HR (BSI)","processor":"X-Processor 5","af":"하이브리드 AF, 425포인트","afFeatures":"피사체 인식 AF (인물, 동물, 자동차, 오토바이, 자전거, 비행기, 기차)","shutter":"기계식 + 전자식","shutterSpeed":"1/180000s (전자식) ~ 15분, 기계식 1/8000~30s","flashSync":"1/250s","iso":"125~12800 (확장 64~51200)","metering":"TTL 256분할, 멀티/스팟/평균/중앙중점","viewfinder":"EVF 0.5인치 OLED, 369만 도트","vfMagnification":"0.8x","display":"3.0인치 3방향 틸트, 184만 도트","burst":"20fps (전자식), 15fps (기계식)","video":"6.2K 30p, 4K 60p","stabilization":"센서 시프트 IBIS 5축 (최대 7스톱)","storage":"SD x2 (UHS-II)","battery":"NP-W235, 약 580매","bodyMaterial":"마그네슘 합금","weatherSeal":"방진방적 (-10℃)","dimensions":"129.5 x 91 x 63.8mm","weight":"557g (바디 only)","released":"2022-11","msrp":"₩2,390,000","owned":true,"notes":"40MP 고해상도 APS-C. 사진 중심 설계.","usedPrice":"₩160~190만","priceRange":"160~190만원","priceNote":"신품 대비 약 20~30% 할인","priceDate":"2025-03"},{"id":"voigtlander-bessa-r2a","brand":"Voigtländer","model":"Bessa R2A","type":"film","subtype":"레인지파인더","mount":"Leica M","filmFormat":"35mm","shutter":"전자식 수직주행 포컬플레인","shutterSpeed":"1/2000s ~ 1s, B","flashSync":"1/125s","metering":"TTL 중앙중점 (CdS)","meterRange":"EV 2~18","iso":"25~3200","viewfinder":"레인지파인더, 0.7x","framelines":"35mm + 90mm, 50mm + 75mm","battery":"SR44 x2 (셔터 작동에 필요)","batteryFree":"❌ 전자식 — 배터리 없이 작동 불가","dimensions":"137 x 80 x 36mm","weight":"405g","produced":"2004~2007","owned":true,"notes":"조리개 우선 AE 지원. M마운트 호환 레인지파인더.","usedPrice":"₩80~120만","priceRange":"80~120만원","priceNote":"단종 후 가격 상승세. 상태에 따라 편차 큼","priceDate":"2025-03"},{"id":"voigtlander-bessa-r4a","brand":"Voigtländer","model":"Bessa R4A","type":"film","subtype":"레인지파인더","mount":"Leica M","filmFormat":"35mm","shutter":"전자식 수직주행 포컬플레인","shutterSpeed":"1/2000s ~ 1s, B","flashSync":"1/125s","metering":"TTL 중앙중점 (CdS)","meterRange":"EV 2~18","iso":"25~3200","viewfinder":"레인지파인더, 0.52x (광각용 와이드 뷰)","framelines":"21mm + 35mm, 25mm + 50mm, 28mm + 70mm","battery":"SR44 x2 (셔터 작동에 필요)","batteryFree":"❌ 전자식 — 배터리 없이 작동 불가","dimensions":"137 x 80 x 36mm","weight":"405g","produced":"2004~2007","owned":true,"notes":"광각 전용 와이드 파인더(0.52x). 21mm 프레임라인 지원.","usedPrice":"₩90~130만","priceRange":"90~130만원","priceNote":"R2A보다 희소. 광각 전용이라 수요 제한적","priceDate":"2025-03"},{"id":"nikon-f3","brand":"Nikon","model":"F3","type":"film","subtype":"SLR","mount":"Nikon F","filmFormat":"35mm","shutter":"전자식 수평주행 티타늄 포컬플레인","shutterSpeed":"1/2000s ~ 8s, B, T","flashSync":"1/80s","metering":"TTL 중앙중점 80/20 (SPD)","meterRange":"EV 1~18 (ISO 100, 50mm f/1.4)","iso":"12~6400","viewfinder":"SLR 광학식, 교환식 (DE-2 기본)","vfCoverage":"약 100%","vfMagnification":"0.8x (DE-2), 0.75x (DE-3 HP)","focusingScreen":"교환식 21종","battery":"SR44 x2 (백업 1/60s 기계식)","batteryFree":"⚠️ 1/60s 백업만 가능","motorDrive":"MD-4 (최대 5.5fps)","dimensions":"148.5 x 96.5 x 65.5mm","weight":"715g (F3) / 760g (F3HP)","produced":"1980~2001","owned":true,"notes":"조르제토 주지아로 디자인. 21년간 생산된 전설적 프로용 SLR.","usedPrice":"₩50~80만","priceRange":"50~80만원","priceNote":"F3HP가 F3보다 약간 높음. F3/T 100만↑","priceDate":"2025-03"},{"id":"nikon-fm3a","brand":"Nikon","model":"FM3a","type":"film","subtype":"SLR","mount":"Nikon F (AI-S 호환)","filmFormat":"35mm","shutter":"하이브리드 (기계식+전자식) 수직주행","shutterSpeed":"1/4000s ~ 8s (전자), 1/4000s ~ 1s + B (기계)","flashSync":"1/250s","metering":"TTL 중앙중점 60/40","meterRange":"EV 2~20 (ISO 100, 50mm f/1.4)","iso":"25~6400","viewfinder":"SLR 광학식, 고정","vfCoverage":"93%","vfMagnification":"0.83x","battery":"SR44 x2 또는 CR1/3N x1","batteryFree":"✅ 전 속도 기계식 작동 가능","dimensions":"141.5 x 90 x 60mm","weight":"540g","produced":"2001~2006","owned":true,"notes":"역사상 유일한 하이브리드 셔터 SLR. FE2+FM2의 완성형.","usedPrice":"₩80~130만","priceRange":"80~130만원","priceNote":"하이브리드 셔터 유일 모델, 꾸준한 수요","priceDate":"2025-03"},{"id":"minolta-x700","brand":"Minolta","model":"X-700","type":"film","subtype":"SLR","mount":"Minolta SR/MC/MD","filmFormat":"35mm","shutter":"전자식 수직주행 포컬플레인","shutterSpeed":"1/1000s ~ 4s, B","flashSync":"1/60s","metering":"TTL 중앙중점 + 프로그램 AE","meterRange":"EV 1~18 (ISO 100)","iso":"25~1600","viewfinder":"SLR 광학식, 어큐트매트 스크린","vfCoverage":"95%","vfMagnification":"0.9x","battery":"SR44 x2 (셔터 작동에 필요)","batteryFree":"❌ 전자식 — 배터리 없이 작동 불가","dimensions":"136 x 88 x 50mm","weight":"505g","produced":"1981~1999","owned":true,"notes":"프로그램 AE 최초 탑재 SLR 중 하나. 밝은 어큐트매트 파인더.","usedPrice":"₩15~30만","priceRange":"15~30만원","priceNote":"가성비 최고 필카. 수량 많아 저렴","priceDate":"2025-03"},{"id":"canon-autoboy6-panorama","brand":"Canon","model":"Autoboy 6 Panorama","type":"film","subtype":"컴팩트","mount":"고정식 렌즈","filmFormat":"35mm","lens":"38-60mm f/3.8-5.6","shutter":"프로그램 AE","shutterSpeed":"1/4s ~ 1/500s","flashSync":"내장 플래시","metering":"프로그램 AE","af":"적외선 AF","viewfinder":"역갈릴레이식","panorama":"파노라마 모드 (마스크 방식)","battery":"CR123A x1","batteryFree":"❌","dimensions":"약 125 x 67 x 45mm","weight":"약 240g","produced":"1990년대","owned":true,"notes":"줌 컴팩트 필카. 파노라마 모드 지원.","usedPrice":"₩5~15만","priceRange":"5~15만원","priceNote":"컴팩트 필카 시세. 상태 좋은 것 드묾","priceDate":"2025-03"},{"id":"canon-demi-ee17","brand":"Canon","model":"Demi EE17","type":"film","subtype":"하프프레임","mount":"고정식 렌즈","filmFormat":"35mm 하프프레임 (18x24mm)","lens":"SH 30mm f/1.7 (풀프레임 환산 ~45mm)","shutter":"코팔 셔터","shutterSpeed":"1/8s ~ 1/500s","metering":"CdS 연동 프로그램 AE","viewfinder":"역갈릴레이식 브라이트프레임","battery":"MR-9 (수은전지) → 대체전지 사용","batteryFree":"⚠️ 측광만 배터리 필요, 셔터는 기계식","dimensions":"약 112 x 72 x 50mm","weight":"약 400g","produced":"1966","owned":true,"notes":"f/1.7 밝은 렌즈의 하프프레임. 36컷 필름으로 72컷 촬영.","usedPrice":"₩20~40만","priceRange":"20~40만원","priceNote":"f/1.7 밝은 렌즈 + 하프프레임 인기로 시세 상승","priceDate":"2025-03"}],"lenses":[{"id":"nikkor-z-24-120","brand":"Nikon","model":"NIKKOR Z 24-120mm f/4 S","mount":"Nikon Z","type":"줌","focalLength":"24-120mm","aperture":"f/4 (고정)","minAperture":"f/22","elements":"16군 13매","diaphragm":"9매 원형","minFocus":"0.35m","maxMagnification":"0.39x","filterSize":"77mm","stabilization":"없음 (바디 VR 의존)","weather_seal":"방진방적","dimensions":"84 x 118mm","weight":"630g","released":"2022-01","msrp":"₩1,499,000","compatibleBodies":["nikon-zf"],"owned":true,"notes":"만능 표준줌. 5배 줌에 0.39x 접사 가능.","usedPrice":"₩100~120만","priceRange":"100~120만원","priceNote":"인기 만능줌. 중고 회전 빠름","priceDate":"2025-03"},{"id":"fuji-xf-50-140","brand":"Fujifilm","model":"XF 50-140mm f/2.8 R LM OIS WR","mount":"Fujifilm X","type":"줌","focalLength":"50-140mm (환산 76-213mm)","aperture":"f/2.8 (고정)","minAperture":"f/22","elements":"23매 16군","diaphragm":"7매 원형","minFocus":"1.0m","maxMagnification":"0.12x","filterSize":"72mm","stabilization":"OIS (최대 5스톱)","weather_seal":"방진방적 (-10℃)","dimensions":"82.9 x 175.9mm","weight":"995g","released":"2014-11","msrp":"₩1,990,000","compatibleBodies":["fuji-xt5"],"owned":true,"notes":"후지 대삼원 망원줌. 리니어모터 AF, 삼각대 마운트 포함.","usedPrice":"₩100~130만","priceRange":"100~130만원","priceNote":"대삼원 망원. 무겁지만 화질 최상","priceDate":"2025-03"},{"id":"fuji-xf-70-300","brand":"Fujifilm","model":"XF 70-300mm f/4-5.6 R LM OIS WR","mount":"Fujifilm X","type":"줌","focalLength":"70-300mm (환산 107-457mm)","aperture":"f/4-5.6","minAperture":"f/22","elements":"17매 12군","diaphragm":"7매 원형","minFocus":"0.83m","maxMagnification":"0.33x","filterSize":"67mm","stabilization":"OIS (최대 5.5스톱)","weather_seal":"방진방적 (-10℃)","dimensions":"75.6 x 132.5mm","weight":"588g","released":"2021-03","msrp":"₩1,190,000","compatibleBodies":["fuji-xt5"],"owned":true,"notes":"경량 초망원줌. 0.33x 하프매크로 가능.","usedPrice":"₩60~80만","priceRange":"60~80만원","priceNote":"경량 초망원. 가성비 좋아 인기","priceDate":"2025-03"}]};
+
+let currentFilter = 'all';
+let searchQuery = '';
+let compareList = []; // {kind, id}
+
+// ── RENDER ──
+function init() {
+  const filmCount = DATA.cameras.filter(c => c.type === 'film').length;
+  const digitalCount = DATA.cameras.filter(c => c.type === 'digital').length;
+  const lensCount = DATA.lenses.length;
+  const total = DATA.cameras.length + DATA.lenses.length;
+
+  document.getElementById('count-all').textContent = total;
+  document.getElementById('count-film').textContent = filmCount;
+  document.getElementById('count-digital').textContent = digitalCount;
+  document.getElementById('count-lens').textContent = lensCount;
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="dot" style="background:var(--accent-film)"></div>필름 <span class="count">${filmCount}</span></div>
+    <div class="stat"><div class="dot" style="background:var(--accent-digital)"></div>디지털 <span class="count">${digitalCount}</span></div>
+    <div class="stat"><div class="dot" style="background:var(--accent-lens)"></div>렌즈 <span class="count">${lensCount}</span></div>
+    <div class="stat" style="margin-left:auto">총 <span class="count">${total}</span>개</div>
+  `;
+
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  let items = [];
+
+  if (currentFilter === 'all' || currentFilter === 'film') {
+    items.push(...DATA.cameras.filter(c => c.type === 'film').map(c => ({...c, _kind: 'camera'})));
+  }
+  if (currentFilter === 'all' || currentFilter === 'digital') {
+    items.push(...DATA.cameras.filter(c => c.type === 'digital').map(c => ({...c, _kind: 'camera'})));
+  }
+  if (currentFilter === 'all' || currentFilter === 'lens') {
+    items.push(...DATA.lenses.map(l => ({...l, _kind: 'lens', type: 'lens'})));
+  }
+
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    items = items.filter(item => {
+      const searchStr = `${item.brand} ${item.model} ${item.mount || ''} ${item.subtype || ''} ${item.notes || ''}`.toLowerCase();
+      return searchStr.includes(q);
+    });
+  }
+
+  grid.innerHTML = items.map(item => {
+    if (item._kind === 'camera') return renderCameraCard(item);
+    return renderLensCard(item);
+  }).join('');
+}
+
+function renderCameraCard(c) {
+  const typeClass = c.type;
+  const typeLabel = c.type === 'film' ? '필름' : '디지털';
+  const specRows = c.type === 'digital' ? `
+    <div class="spec-item"><strong>${c.resolution}</strong></div>
+    <div class="spec-item">${c.sensor}</div>
+    <div class="spec-item"><strong>${c.shutterSpeed?.split('~')[0] || ''}</strong></div>
+    <div class="spec-item">${c.weight}</div>
+  ` : `
+    <div class="spec-item"><strong>${c.subtype}</strong></div>
+    <div class="spec-item">${c.filmFormat || '35mm'}</div>
+    <div class="spec-item"><strong>${c.shutterSpeed?.split('~')[0] || ''}</strong></div>
+    <div class="spec-item">${c.weight}</div>
+  `;
+
+  return `
+    <div class="card ${typeClass}" onclick="openModal('camera','${c.id}')">
+      <div class="compare-check ${compareList.some(x=>x.id===c.id)?'checked':''}" onclick="event.stopPropagation();toggleCompare('camera','${c.id}')">${compareList.some(x=>x.id===c.id)?'✓':''}</div>
+      <div class="type-indicator"></div>
+      <div class="brand">${c.brand}</div>
+      <div class="model-name">${c.model}</div>
+      <div class="tag-row">
+        <span class="tag ${typeClass}">${typeLabel} · ${c.subtype}</span>
+        <span class="tag mount">${c.mount}</span>
+        ${c.owned ? '<span class="tag owned">⭐ 보유</span>' : ''}
+      </div>
+      <div class="specs-preview">${specRows}</div>
+      ${c.usedPrice ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:0.8rem;color:var(--accent-film)">💰 중고 ${c.usedPrice}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderLensCard(l) {
+  return `
+    <div class="card lens" onclick="openModal('lens','${l.id}')">
+      <div class="compare-check ${compareList.some(x=>x.id===l.id)?'checked':''}" onclick="event.stopPropagation();toggleCompare('lens','${l.id}')">${compareList.some(x=>x.id===l.id)?'✓':''}</div>
+      <div class="type-indicator"></div>
+      <div class="brand">${l.brand}</div>
+      <div class="model-name">${l.model}</div>
+      <div class="tag-row">
+        <span class="tag lens">${l.type} 렌즈</span>
+        <span class="tag mount">${l.mount}</span>
+        ${l.owned ? '<span class="tag owned">⭐ 보유</span>' : ''}
+      </div>
+      <div class="specs-preview">
+        <div class="spec-item"><strong>${l.focalLength}</strong></div>
+        <div class="spec-item">${l.aperture}</div>
+        <div class="spec-item"><strong>${l.filterSize}</strong></div>
+        <div class="spec-item">${l.weight}</div>
+      </div>
+      ${l.usedPrice ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:0.8rem;color:var(--accent-lens)">💰 중고 ${l.usedPrice}</div>` : ''}
+    </div>
+  `;
+}
+
+// ── MODAL ──
+function openModal(kind, id) {
+  const item = kind === 'camera'
+    ? DATA.cameras.find(c => c.id === id)
+    : DATA.lenses.find(l => l.id === id);
+  if (!item) return;
+
+  const modal = document.getElementById('modal');
+  const typeClass = kind === 'lens' ? 'lens' : item.type;
+
+  let specSections = '';
+  if (kind === 'camera') {
+    if (item.type === 'digital') {
+      specSections = `
+        <div class="spec-section">
+          <h3>📸 센서 & 프로세서</h3>
+          <div class="spec-grid">
+            <span class="spec-label">센서</span><span class="spec-value">${item.sensor}</span>
+            <span class="spec-label">해상도</span><span class="spec-value">${item.resolution}</span>
+            <span class="spec-label">센서 타입</span><span class="spec-value">${item.sensorType || '-'}</span>
+            <span class="spec-label">프로세서</span><span class="spec-value">${item.processor || '-'}</span>
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>⚡ AF & 셔터</h3>
+          <div class="spec-grid">
+            <span class="spec-label">AF</span><span class="spec-value">${item.af || '-'}</span>
+            <span class="spec-label">AF 기능</span><span class="spec-value">${item.afFeatures || '-'}</span>
+            <span class="spec-label">셔터</span><span class="spec-value">${item.shutter}</span>
+            <span class="spec-label">셔터 속도</span><span class="spec-value">${item.shutterSpeed}</span>
+            <span class="spec-label">연사</span><span class="spec-value">${item.burst || '-'}</span>
+            <span class="spec-label">플래시 동조</span><span class="spec-value">${item.flashSync || '-'}</span>
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>🔍 파인더 & 디스플레이</h3>
+          <div class="spec-grid">
+            <span class="spec-label">파인더</span><span class="spec-value">${item.viewfinder}</span>
+            <span class="spec-label">배율</span><span class="spec-value">${item.vfMagnification || '-'}</span>
+            <span class="spec-label">디스플레이</span><span class="spec-value">${item.display || '-'}</span>
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>📹 영상 & 기타</h3>
+          <div class="spec-grid">
+            <span class="spec-label">동영상</span><span class="spec-value">${item.video || '-'}</span>
+            <span class="spec-label">손떨림보정</span><span class="spec-value">${item.stabilization || '-'}</span>
+            <span class="spec-label">ISO</span><span class="spec-value">${item.iso}</span>
+            <span class="spec-label">저장매체</span><span class="spec-value">${item.storage || '-'}</span>
+            <span class="spec-label">배터리</span><span class="spec-value">${item.battery || '-'}</span>
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>📐 바디</h3>
+          <div class="spec-grid">
+            <span class="spec-label">재질</span><span class="spec-value">${item.bodyMaterial || '-'}</span>
+            <span class="spec-label">방진방적</span><span class="spec-value">${item.weatherSeal || '-'}</span>
+            <span class="spec-label">크기</span><span class="spec-value">${item.dimensions}</span>
+            <span class="spec-label">무게</span><span class="spec-value">${item.weight}</span>
+            <span class="spec-label">출시</span><span class="spec-value">${item.released || '-'}</span>
+            <span class="spec-label">출시가</span><span class="spec-value">${item.msrp || '-'}</span>
+          </div>
+        </div>
+        ${item.usedPrice ? `<div class="spec-section">
+          <h3>💰 중고 시세</h3>
+          <div class="spec-grid">
+            <span class="spec-label">시세 범위</span><span class="spec-value highlight">${item.usedPrice}</span>
+            <span class="spec-label">참고</span><span class="spec-value">${item.priceNote || '-'}</span>
+            <span class="spec-label">조회 시점</span><span class="spec-value">${item.priceDate || '-'}</span>
+          </div>
+        </div>` : ''}`;
+    } else {
+      // Film camera
+      const battFreeClass = item.batteryFree?.startsWith('✅') ? 'highlight' : item.batteryFree?.startsWith('❌') ? 'warn' : '';
+      specSections = `
+        <div class="spec-section">
+          <h3>📸 기본 정보</h3>
+          <div class="spec-grid">
+            <span class="spec-label">타입</span><span class="spec-value">${item.subtype}</span>
+            <span class="spec-label">필름 포맷</span><span class="spec-value">${item.filmFormat || '35mm'}</span>
+            <span class="spec-label">마운트</span><span class="spec-value">${item.mount}</span>
+            ${item.lens ? `<span class="spec-label">렌즈</span><span class="spec-value">${item.lens}</span>` : ''}
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>⚡ 셔터 & 측광</h3>
+          <div class="spec-grid">
+            <span class="spec-label">셔터</span><span class="spec-value">${item.shutter}</span>
+            <span class="spec-label">셔터 속도</span><span class="spec-value">${item.shutterSpeed}</span>
+            <span class="spec-label">플래시 동조</span><span class="spec-value">${item.flashSync || '-'}</span>
+            <span class="spec-label">측광</span><span class="spec-value">${item.metering || '-'}</span>
+            <span class="spec-label">측광 범위</span><span class="spec-value">${item.meterRange || '-'}</span>
+            <span class="spec-label">ISO</span><span class="spec-value">${item.iso || '-'}</span>
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>🔍 파인더</h3>
+          <div class="spec-grid">
+            <span class="spec-label">파인더</span><span class="spec-value">${item.viewfinder}</span>
+            ${item.vfCoverage ? `<span class="spec-label">시야율</span><span class="spec-value">${item.vfCoverage}</span>` : ''}
+            ${item.vfMagnification ? `<span class="spec-label">배율</span><span class="spec-value">${item.vfMagnification}</span>` : ''}
+            ${item.framelines ? `<span class="spec-label">프레임라인</span><span class="spec-value">${item.framelines}</span>` : ''}
+            ${item.focusingScreen ? `<span class="spec-label">스크린</span><span class="spec-value">${item.focusingScreen}</span>` : ''}
+          </div>
+        </div>
+        <div class="spec-section">
+          <h3>🔋 전원 & 바디</h3>
+          <div class="spec-grid">
+            <span class="spec-label">배터리</span><span class="spec-value">${item.battery || '-'}</span>
+            <span class="spec-label">배터리 없이</span><span class="spec-value ${battFreeClass}">${item.batteryFree || '-'}</span>
+            ${item.motorDrive ? `<span class="spec-label">모터드라이브</span><span class="spec-value">${item.motorDrive}</span>` : ''}
+            <span class="spec-label">크기</span><span class="spec-value">${item.dimensions || '-'}</span>
+            <span class="spec-label">무게</span><span class="spec-value">${item.weight}</span>
+            <span class="spec-label">생산</span><span class="spec-value">${item.produced || '-'}</span>
+          </div>
+        </div>
+        ${item.usedPrice ? `<div class="spec-section">
+          <h3>💰 중고 시세</h3>
+          <div class="spec-grid">
+            <span class="spec-label">시세 범위</span><span class="spec-value highlight">${item.usedPrice}</span>
+            <span class="spec-label">참고</span><span class="spec-value">${item.priceNote || '-'}</span>
+            <span class="spec-label">조회 시점</span><span class="spec-value">${item.priceDate || '-'}</span>
+          </div>
+        </div>` : ''}`;
+    }
+  } else {
+    // Lens
+    specSections = `
+      <div class="spec-section">
+        <h3>🔭 광학</h3>
+        <div class="spec-grid">
+          <span class="spec-label">초점거리</span><span class="spec-value">${item.focalLength}</span>
+          <span class="spec-label">개방 조리개</span><span class="spec-value">${item.aperture}</span>
+          <span class="spec-label">최소 조리개</span><span class="spec-value">${item.minAperture || '-'}</span>
+          <span class="spec-label">렌즈 구성</span><span class="spec-value">${item.elements || '-'}</span>
+          <span class="spec-label">조리개 날</span><span class="spec-value">${item.diaphragm || '-'}</span>
+        </div>
+      </div>
+      <div class="spec-section">
+        <h3>⚡ AF & 기능</h3>
+        <div class="spec-grid">
+          <span class="spec-label">최단 초점</span><span class="spec-value">${item.minFocus}</span>
+          <span class="spec-label">최대 배율</span><span class="spec-value">${item.maxMagnification || '-'}</span>
+          <span class="spec-label">필터 구경</span><span class="spec-value">${item.filterSize}</span>
+          <span class="spec-label">손떨림보정</span><span class="spec-value">${item.stabilization || '-'}</span>
+          <span class="spec-label">방진방적</span><span class="spec-value">${item.weather_seal || '-'}</span>
+        </div>
+      </div>
+      <div class="spec-section">
+        <h3>📐 물리</h3>
+        <div class="spec-grid">
+          <span class="spec-label">크기</span><span class="spec-value">${item.dimensions || '-'}</span>
+          <span class="spec-label">무게</span><span class="spec-value">${item.weight}</span>
+          <span class="spec-label">출시</span><span class="spec-value">${item.released || '-'}</span>
+          <span class="spec-label">출시가</span><span class="spec-value">${item.msrp || '-'}</span>
+        </div>
+      </div>
+      ${item.usedPrice ? `<div class="spec-section">
+        <h3>💰 중고 시세</h3>
+        <div class="spec-grid">
+          <span class="spec-label">시세 범위</span><span class="spec-value highlight">${item.usedPrice}</span>
+          <span class="spec-label">참고</span><span class="spec-value">${item.priceNote || '-'}</span>
+          <span class="spec-label">조회 시점</span><span class="spec-value">${item.priceDate || '-'}</span>
+        </div>
+      </div>` : ''}`;
+  }
+
+  modal.innerHTML = `
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-brand">${item.brand}</div>
+      <div class="modal-model">${item.model}</div>
+      <div class="modal-tags">
+        <span class="tag ${typeClass}">${kind === 'lens' ? '렌즈' : item.type === 'film' ? '필름 · ' + item.subtype : '디지털 · ' + item.subtype}</span>
+        <span class="tag mount">${item.mount}</span>
+        ${item.owned ? '<span class="tag owned">⭐ 보유 중</span>' : ''}
+      </div>
+      ${item.notes ? `<div class="modal-note">${item.notes}</div>` : ''}
+    </div>
+    ${specSections}
+  `;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── EVENTS ──
+document.getElementById('modal-overlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentFilter = tab.dataset.filter;
+    renderGrid();
+  });
+});
+
+document.getElementById('search').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  renderGrid();
+});
+
+// ── COMPARE ──
+function toggleCompare(kind, id) {
+  const idx = compareList.findIndex(x => x.id === id);
+  if (idx >= 0) {
+    compareList.splice(idx, 1);
+  } else {
+    if (compareList.length >= 4) { alert('최대 4개까지 비교 가능합니다'); return; }
+    compareList.push({kind, id});
+  }
+  updateCompareBar();
+  renderGrid();
+}
+
+function updateCompareBar() {
+  const bar = document.getElementById('compare-bar');
+  const items = document.getElementById('selected-items');
+  const btn = document.getElementById('compare-btn');
+  
+  if (compareList.length === 0) { bar.classList.remove('show'); return; }
+  bar.classList.add('show');
+  
+  items.innerHTML = compareList.map(x => {
+    const item = x.kind === 'camera' ? DATA.cameras.find(c=>c.id===x.id) : DATA.lenses.find(l=>l.id===x.id);
+    return `<div class="selected-chip">${item.brand} ${item.model} <span class="remove" onclick="toggleCompare('${x.kind}','${x.id}')">✕</span></div>`;
+  }).join('');
+  
+  btn.disabled = compareList.length < 2;
+}
+
+function showCompare() {
+  if (compareList.length < 2) return;
+  
+  const items = compareList.map(x => {
+    return x.kind === 'camera' ? DATA.cameras.find(c=>c.id===x.id) : DATA.lenses.find(l=>l.id===x.id);
+  });
+  
+  // Determine if all cameras, all lenses, or mixed
+  const allCameras = compareList.every(x => x.kind === 'camera');
+  const allLenses = compareList.every(x => x.kind === 'lens');
+  
+  let rows = [];
+  if (allCameras) {
+    const allFilm = items.every(i => i.type === 'film');
+    const allDigital = items.every(i => i.type === 'digital');
+    
+    rows = [
+      ['타입', ...items.map(i => i.type === 'film' ? '🎞️ 필름 ' + i.subtype : '🖥️ 디지털 ' + i.subtype)],
+      ['마운트', ...items.map(i => i.mount)],
+      ['센서/필름', ...items.map(i => i.type === 'digital' ? i.sensor : (i.filmFormat || '35mm'))],
+    ];
+    if (items.some(i => i.resolution)) rows.push(['해상도', ...items.map(i => i.resolution || '-')]);
+    rows.push(
+      ['셔터', ...items.map(i => i.shutter)],
+      ['셔터 속도', ...items.map(i => i.shutterSpeed)],
+      ['측광', ...items.map(i => i.metering || '-')],
+      ['ISO', ...items.map(i => i.iso || '-')],
+      ['파인더', ...items.map(i => i.viewfinder)],
+      ['파인더 배율', ...items.map(i => i.vfMagnification || '-')]
+    );
+    if (items.some(i => i.af)) rows.push(['AF', ...items.map(i => i.af || '-')]);
+    if (items.some(i => i.burst)) rows.push(['연사', ...items.map(i => i.burst || '-')]);
+    if (items.some(i => i.video)) rows.push(['동영상', ...items.map(i => i.video || '-')]);
+    if (items.some(i => i.stabilization)) rows.push(['손떨림보정', ...items.map(i => i.stabilization || '-')]);
+    rows.push(
+      ['배터리 없이', ...items.map(i => i.batteryFree || '-')],
+      ['무게', ...items.map(i => i.weight)],
+      ['크기', ...items.map(i => i.dimensions || '-')],
+      ['💰 중고 시세', ...items.map(i => i.usedPrice || '-')]
+    );
+    if (items.some(i => i.msrp)) rows.push(['출시가', ...items.map(i => i.msrp || '-')]);
+  } else if (allLenses) {
+    rows = [
+      ['마운트', ...items.map(i => i.mount)],
+      ['초점거리', ...items.map(i => i.focalLength)],
+      ['조리개', ...items.map(i => i.aperture)],
+      ['렌즈 구성', ...items.map(i => i.elements || '-')],
+      ['최단 초점', ...items.map(i => i.minFocus)],
+      ['최대 배율', ...items.map(i => i.maxMagnification || '-')],
+      ['필터 구경', ...items.map(i => i.filterSize)],
+      ['손떨림보정', ...items.map(i => i.stabilization || '-')],
+      ['방진방적', ...items.map(i => i.weather_seal || '-')],
+      ['무게', ...items.map(i => i.weight)],
+      ['💰 중고 시세', ...items.map(i => i.usedPrice || '-')],
+      ['출시가', ...items.map(i => i.msrp || '-')]
+    ];
+  } else {
+    rows = [
+      ['타입', ...items.map(i => i.type === 'lens' ? '🔭 렌즈' : i.type === 'film' ? '🎞️ 필름' : '🖥️ 디지털')],
+      ['마운트', ...items.map(i => i.mount)],
+      ['무게', ...items.map(i => i.weight)],
+      ['💰 중고 시세', ...items.map(i => i.usedPrice || '-')]
+    ];
+  }
+  
+  const modal = document.getElementById('modal');
+  modal.innerHTML = `
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-model" style="font-size:1.4rem">📊 스펙 비교</div>
+      <div style="color:var(--text2);font-size:0.85rem">${items.map(i=>i.brand+' '+i.model).join(' vs ')}</div>
+    </div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          ${items.map(i => `<th class="model-header">${i.model}</th>`).join('')}
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(row => `<tr><td style="color:var(--text2)">${row[0]}</td>${row.slice(1).map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}
+      </tbody>
+    </table>
+  `;
+  
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ── INIT ──
+init();
+</script>
+</body>
+</html>
