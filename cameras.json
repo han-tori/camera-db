@@ -333,17 +333,17 @@
       "image": "images/olympus-e-pl3.jpg"
     },
     {
-      "id": "instax-mini-evo",
+      "id": "instax-wide-evo",
       "brand": "Fujifilm",
-      "model": "Instax Mini Evo",
+      "model": "Instax Wide Evo",
       "type": "digital",
       "subtype": "하이브리드 즉석카메라",
       "mount": "고정식 렌즈",
-      "sensor": "1/5인치 CMOS (1920x1920)",
-      "resolution": "4.9MP",
-      "image": "images/instax-mini-evo.jpg",
+      "sensor": "1/2인치 CMOS",
+      "resolution": "16MP",
+      "image": "images/instax-wide-evo.jpg",
       "owned": true,
-      "notes": "디지털 촬영 후 골라서 프린트 가능한 하이브리드 폴라로이드."
+      "notes": "Instax Wide 포맷 하이브리드 즉석카메라. 디지털 촬영 후 골라서 프린트 가능. 와이드앵글 렌즈 탑재."
     },
     {
       "id": "epson-rd1s",
@@ -371,6 +371,28 @@
       "image": "images/pentax-zoom-280p.jpg",
       "owned": true,
       "notes": "파노라마 모드를 지원하는 줌 컴팩트 필름 카메라."
+    },
+    {
+      "id": "canon-ql17-giii",
+      "brand": "Canon",
+      "model": "Canonet QL17 GIII",
+      "type": "film",
+      "subtype": "레인지파인더",
+      "mount": "고정식 렌즈",
+      "filmFormat": "35mm",
+      "lens": "Canon Lens SH 40mm f/1.7",
+      "shutter": "Copal 셔터",
+      "shutterSpeed": "1/4s ~ 1/500s, B",
+      "metering": "CdS 연동 프로그램 AE + 수동",
+      "viewfinder": "레인지파인더 (밝은 프레임)",
+      "battery": "MR-9 (수은전지) → 대체전지 사용",
+      "batteryFree": "⚠️ 측광만 배터리 필요, 셔터는 기계식",
+      "dimensions": "약 120 x 78 x 60mm",
+      "weight": "약 620g",
+      "produced": "1972~1982",
+      "owned": true,
+      "notes": "캐논 최고의 컴팩트 레인지파인더. f/1.7 밝은 렌즈. 오렌지 가죽 커스텀.",
+      "image": "images/canon-ql17-giii.jpg"
     },
     {
       "id": "memowell-dv-36",
@@ -479,6 +501,22 @@
       "image": "images/fuji-xf-70-300.jpg"
     },
     {
+      "id": "nikon-70-300g",
+      "brand": "Nikon",
+      "model": "AF Zoom-NIKKOR 70-300mm f/4-5.6G",
+      "mount": "Nikon F",
+      "type": "줌",
+      "focalLength": "70-300mm",
+      "aperture": "f/4-5.6",
+      "filterSize": "62mm",
+      "compatibleBodies": [
+        "nikon-zf"
+      ],
+      "image": "images/nikon-70-300g.jpg",
+      "owned": true,
+      "notes": "니콘 F마운트 망원 줌. FTZ II로 Zf에 사용 가능."
+    },
+    {
       "id": "olympus-14-42-iir",
       "brand": "Olympus",
       "model": "M.Zuiko Digital 14-42mm f/3.5-5.6 II R",
@@ -519,29 +557,41 @@
       "notes": "인물용 밝은 망원 단렌즈."
     },
     {
-      "id": "unknown-28mm",
-      "brand": "Voigtländer",
-      "model": "Ultron 28mm f/2 (예상)",
+      "id": "zeiss-biogon-28",
+      "brand": "Carl Zeiss",
+      "model": "Biogon T* 28mm f/2.8 ZM",
       "mount": "Leica M",
       "type": "단렌즈",
       "focalLength": "28mm",
+      "aperture": "f/2.8",
+      "filterSize": "43mm",
       "image": "images/lens-28mm.jpg",
       "owned": true,
-      "notes": "사진 기반 유추 모델."
+      "notes": "자이스 ZM 광각 렌즈. HOYA HMC UV(C) 43mm 필터 장착."
     },
     {
-      "id": "unknown-50mm",
+      "id": "voigtlander-apo-50",
       "brand": "Voigtländer",
-      "model": "Nokton 50mm f/1.5 (예상)",
+      "model": "APO-Lanthar 50mm f/2 VM",
       "mount": "Leica M",
       "type": "단렌즈",
       "focalLength": "50mm",
+      "aperture": "f/2",
       "image": "images/lens-50mm.jpg",
       "owned": true,
-      "notes": "사진 기반 유추 모델."
+      "notes": "APO 색수차 보정 설계의 표준 렌즈. 최고 해상력."
     }
   ],
   "accessories": [
+    {
+      "id": "olympus-fl-lm1",
+      "brand": "Olympus",
+      "model": "FL-LM1",
+      "type": "외장 플래시",
+      "mount": "핫슈",
+      "owned": true,
+      "notes": "E-PL3 동봉 소형 외장 플래시."
+    },
     {
       "id": "leofoto-mt-03",
       "brand": "Leofoto",
