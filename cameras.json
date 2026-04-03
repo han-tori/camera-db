@@ -505,17 +505,17 @@
       "notes": "인물용 밝은 망원 단렌즈."
     },
     {
-      "id": "voigtlander-color-skopar-28",
+      "id": "voigtlander-nokton-28",
       "brand": "Voigtländer",
-      "model": "Color-Skopar 28mm f/2.8",
+      "model": "Nokton 28mm f/1.5 VM",
       "mount": "Leica M",
       "type": "단렌즈",
       "focalLength": "28mm",
-      "aperture": "f/2.8",
+      "aperture": "f/1.5",
       "filterSize": "43mm",
       "image": "images/lens-28mm.jpg",
       "owned": true,
-      "notes": "Voigtländer M마운트 광각 렌즈. HOYA HMC UV(C) 43mm 필터 장착."
+      "notes": "Voigtländer M마운트 밝은 광각 렌즈. HOYA HMC UV(C) 43mm 필터 장착."
     },
     {
       "id": "voigtlander-color-skopar-50",
