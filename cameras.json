@@ -300,7 +300,11 @@
       "produced": "2024",
       "owned": true,
       "notes": "컬러 이펙트 다이얼, 비네팅 스위치 등 아날로그 조작 지원 즉석카메라.",
-      "image": "images/instax-mini-99.jpg"
+      "image": "images/instax-mini-99.jpg",
+      "usedPrice": "₩22~30만",
+      "priceRange": "22~30만원",
+      "priceNote": "중고나라 기준. 케이스/필름 포함 여부에 따라 편차",
+      "priceDate": "2026-04"
     },
     {
       "id": "olympus-e-pl3",
@@ -330,7 +334,11 @@
       "released": "2011-06",
       "owned": true,
       "notes": "작고 가벼운 입문용 마이크로포서드 바디.",
-      "image": "images/olympus-e-pl3.jpg"
+      "image": "images/olympus-e-pl3.jpg",
+      "usedPrice": "₩20~30만",
+      "priceRange": "20~30만원",
+      "priceNote": "14-42mm 킷 포함 기준. 바디만은 더 저렴",
+      "priceDate": "2026-04"
     },
     {
       "id": "instax-wide-evo",
@@ -343,7 +351,11 @@
       "resolution": "16MP",
       "image": "images/instax-wide-evo.jpg",
       "owned": true,
-      "notes": "Instax Wide 포맷 하이브리드 즉석카메라. 디지털 촬영 후 골라서 프린트 가능. 와이드앵글 렌즈 탑재."
+      "notes": "Instax Wide 포맷 하이브리드 즉석카메라. 디지털 촬영 후 골라서 프린트 가능. 와이드앵글 렌즈 탑재.",
+      "usedPrice": "₩35~48만",
+      "priceRange": "35~48만원",
+      "priceNote": "2025년 출시. 신품 52만원 대비 소폭 하락",
+      "priceDate": "2026-04"
     },
     {
       "id": "epson-rd1s",
@@ -357,7 +369,11 @@
       "sensorType": "CCD",
       "image": "images/epson-rd1s.jpg",
       "owned": true,
-      "notes": "세계 최초의 디지털 레인지파인더 카메라. 아날로그 와인딩 레버가 특징."
+      "notes": "세계 최초의 디지털 레인지파인더 카메라. 아날로그 와인딩 레버가 특징.",
+      "usedPrice": "₩150~250만",
+      "priceRange": "150~250만원",
+      "priceNote": "희소 디지털 레인지파인더. 상태에 따라 편차 큼",
+      "priceDate": "2026-04"
     },
     {
       "id": "memowell-dv-36",
@@ -369,7 +385,11 @@
       "filmFormat": "35mm",
       "image": "images/memowell-dv-36.jpg",
       "owned": true,
-      "notes": "오토 와인딩 모터 드라이브가 탑재된 35mm 필름 카메라."
+      "notes": "오토 와인딩 모터 드라이브가 탑재된 35mm 필름 카메라.",
+      "usedPrice": "시세 없음",
+      "priceRange": "시세 없음",
+      "priceNote": "토이카메라. 중고 거래 거의 없음",
+      "priceDate": "2026-04"
     }
   ],
   "lenses": [
@@ -488,7 +508,11 @@
         "olympus-e-pl3"
       ],
       "owned": true,
-      "notes": "초경량 침동식 번들 렌즈."
+      "notes": "초경량 침동식 번들 렌즈.",
+      "usedPrice": "시세 없음",
+      "priceRange": "시세 없음",
+      "priceNote": "번들 렌즈. 단품 거래 드묾",
+      "priceDate": "2026-04"
     },
     {
       "id": "fuji-xf-56-12-r",
@@ -502,7 +526,11 @@
       "weight": "405g",
       "image": "images/xf-56mm.jpg",
       "owned": true,
-      "notes": "인물용 밝은 망원 단렌즈."
+      "notes": "인물용 밝은 망원 단렌즈.",
+      "usedPrice": "₩55~85만",
+      "priceRange": "55~85만원",
+      "priceNote": "1세대(R). WR 신형 대비 저렴",
+      "priceDate": "2026-04"
     },
     {
       "id": "voigtlander-nokton-28",
@@ -515,7 +543,11 @@
       "filterSize": "43mm",
       "image": "images/lens-28mm.jpg",
       "owned": true,
-      "notes": "Voigtländer M마운트 밝은 광각 렌즈. HOYA HMC UV(C) 43mm 필터 장착."
+      "notes": "Voigtländer M마운트 밝은 광각 렌즈. HOYA HMC UV(C) 43mm 필터 장착.",
+      "usedPrice": "₩78~100만",
+      "priceRange": "78~100만원",
+      "priceNote": "신품 약 130만원. VM 마운트",
+      "priceDate": "2026-04"
     },
     {
       "id": "voigtlander-color-skopar-50",
@@ -527,7 +559,11 @@
       "aperture": "f/2.2",
       "image": "images/lens-50mm.jpg",
       "owned": true,
-      "notes": "Voigtländer M마운트 표준 렌즈."
+      "notes": "Voigtländer M마운트 표준 렌즈.",
+      "usedPrice": "₩55~70만",
+      "priceRange": "55~70만원",
+      "priceNote": "신품 약 80만원. 컴팩트 표준렌즈",
+      "priceDate": "2026-04"
     }
   ],
   "accessories": [
@@ -539,7 +575,9 @@
       "mount": "핫슈",
       "owned": true,
       "notes": "E-PL3 동봉 소형 외장 플래시.",
-      "image": "images/olympus-fl-lm1.jpg"
+      "image": "images/olympus-fl-lm1.jpg",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "leofoto-mt-03",
@@ -550,7 +588,11 @@
       "weight": "162g",
       "owned": true,
       "notes": "알루미늄 미니 폴딩 삼각대. 거미 다리 형태 변형 가능.",
-      "image": "images/mt-03.jpg"
+      "image": "images/mt-03.jpg",
+      "usedPrice": "₩7~9만",
+      "priceRange": "7~9만원",
+      "priceNote": "볼헤드 별매. 세트는 12~13만원",
+      "priceDate": "2026-04"
     },
     {
       "id": "leofoto-f-19",
@@ -561,7 +603,9 @@
       "weight": "138g",
       "owned": true,
       "notes": "미니 볼헤드. MT-03과 함께 사용.",
-      "image": "images/f-19.jpg"
+      "image": "images/f-19.jpg",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "nikon-ftz-ii",
@@ -572,7 +616,11 @@
       "weight": "125g",
       "owned": true,
       "notes": "니콘 F렌즈 -> Z바디 어댑터.",
-      "image": "images/ftz-ii.jpg"
+      "image": "images/ftz-ii.jpg",
+      "usedPrice": "₩23~29만",
+      "priceRange": "23~29만원",
+      "priceNote": "Zf/Z6 유저 필수 어댑터",
+      "priceDate": "2026-04"
     },
     {
       "id": "fuji-np-w235-charger",
@@ -581,7 +629,9 @@
       "type": "충전기",
       "owned": true,
       "notes": "후지필름 NP-W235 듀얼 배터리 충전기.",
-      "image": "images/w235-charger.jpg"
+      "image": "images/w235-charger.jpg",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "panasonic-dmw-blg10-charger",
@@ -590,7 +640,9 @@
       "type": "충전기",
       "owned": true,
       "notes": "파나소닉 DMW-BLG10 및 라이카 BP-DC15-TK 듀얼 배터리 충전기.",
-      "image": "images/blg10-charger.jpg"
+      "image": "images/blg10-charger.jpg",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "doomo-meter-d",
@@ -600,7 +652,11 @@
       "mount": "핫슈/콜드슈",
       "image": "images/doomo-meter.jpg",
       "owned": true,
-      "notes": "카메라 상단에 장착하는 초소형 OLED 노출계."
+      "notes": "카메라 상단에 장착하는 초소형 OLED 노출계.",
+      "usedPrice": "₩12~15만",
+      "priceRange": "12~15만원",
+      "priceNote": "신품 약 15만원. 중고 거래 드묾",
+      "priceDate": "2026-04"
     },
     {
       "id": "shoten-m-fx-adapter",
@@ -609,7 +665,9 @@
       "type": "어댑터",
       "image": "images/adapter-m42.jpg",
       "owned": true,
-      "notes": "렌즈 변환 어댑터."
+      "notes": "렌즈 변환 어댑터.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "kf-nikf-lm-adapter",
@@ -618,7 +676,9 @@
       "type": "어댑터",
       "image": "images/kf-nikf-lm.jpg",
       "owned": true,
-      "notes": "니콘 F마운트 렌즈를 라이카 M마운트 바디에 연결하는 어댑터."
+      "notes": "니콘 F마운트 렌즈를 라이카 M마운트 바디에 연결하는 어댑터.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "techart-tzm-02",
@@ -628,7 +688,11 @@
       "mount": "Leica M to Nikon Z",
       "image": "images/techart-tzm-02.jpg",
       "owned": true,
-      "notes": "라이카 M 렌즈를 니콘 Z 바디에서 자동초점(AF)으로 사용할 수 있게 해주는 스마트 어댑터."
+      "notes": "라이카 M 렌즈를 니콘 Z 바디에서 자동초점(AF)으로 사용할 수 있게 해주는 스마트 어댑터.",
+      "usedPrice": "₩40~50만",
+      "priceRange": "40~50만원",
+      "priceNote": "M→Z AF 어댑터. 신품 약 55만원",
+      "priceDate": "2026-04"
     },
     {
       "id": "blue-leather-half-case",
@@ -637,7 +701,9 @@
       "type": "케이스",
       "image": "images/blue-half-case.jpg",
       "owned": true,
-      "notes": "Leica C-Lux 전용 네이비/블루 컬러 가죽 하프 케이스 + 넥스트랩."
+      "notes": "Leica C-Lux 전용 네이비/블루 컬러 가죽 하프 케이스 + 넥스트랩.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "leica-brown-leather-case",
@@ -646,7 +712,9 @@
       "type": "케이스",
       "image": "images/leica-brown-case.jpg",
       "owned": true,
-      "notes": "라이카 로고가 각인된 브라운 색상의 오리지널 가죽 케이스 (스트랩 포함)."
+      "notes": "라이카 로고가 각인된 브라운 색상의 오리지널 가죽 케이스 (스트랩 포함).",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "plastic-mini-tripod",
@@ -656,7 +724,9 @@
       "mount": "1/4인치 나사",
       "image": "images/mini-tripod.jpg",
       "owned": true,
-      "notes": "볼헤드가 일체형으로 달린 소형 플라스틱 미니 삼각대."
+      "notes": "볼헤드가 일체형으로 달린 소형 플라스틱 미니 삼각대.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "kenko-uv-67mm",
@@ -666,7 +736,9 @@
       "filterSize": "67mm",
       "image": "images/kenko-uv-67mm.jpg",
       "owned": true,
-      "notes": "켄코 멀티코팅 UV 필터 (67mm 구경)."
+      "notes": "켄코 멀티코팅 UV 필터 (67mm 구경).",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "hy-revoring-67-82",
@@ -676,7 +748,11 @@
       "filterSize": "67-82mm (가변)",
       "image": "images/hy-revoring-67-82.jpg",
       "owned": true,
-      "notes": "하나의 필터로 67mm부터 82mm까지 다양한 구경의 렌즈에 사용 가능한 가변 ND/CPL 필터."
+      "notes": "하나의 필터로 67mm부터 82mm까지 다양한 구경의 렌즈에 사용 가능한 가변 ND/CPL 필터.",
+      "usedPrice": "₩20~24만",
+      "priceRange": "20~24만원",
+      "priceNote": "VND+CPL 복합 필터",
+      "priceDate": "2026-04"
     },
     {
       "id": "hy-revoring-37-49",
@@ -686,7 +762,9 @@
       "filterSize": "37-49mm (가변)",
       "image": "images/hy-revoring-37-49.jpg",
       "owned": true,
-      "notes": "작은 구경 렌즈들을 위한 가변 ND/CPL 필터."
+      "notes": "작은 구경 렌즈들을 위한 가변 ND/CPL 필터.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "kenko-air-mc-uv-58mm",
@@ -695,7 +773,9 @@
       "type": "필터 (UV)",
       "filterSize": "58mm",
       "image": "images/kenko-uv-58mm.jpg",
-      "owned": true
+      "owned": true,
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "zoomtec-protector-58mm",
@@ -704,7 +784,9 @@
       "type": "필터 (프로텍터)",
       "filterSize": "58mm",
       "image": "images/zoomtec-uv-58mm.jpg",
-      "owned": true
+      "owned": true,
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "cozo-yg-55mm",
@@ -714,7 +796,9 @@
       "filterSize": "55mm",
       "image": "images/cozo-yg-55mm.jpg",
       "owned": true,
-      "notes": "흑백 사진 촬영 시 녹색과 노란색의 콘트라스트를 조절하는 YG(Yellow-Green) 필터."
+      "notes": "흑백 사진 촬영 시 녹색과 노란색의 콘트라스트를 조절하는 YG(Yellow-Green) 필터.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "tiffen-uv-52mm",
@@ -723,7 +807,9 @@
       "type": "필터 (UV)",
       "filterSize": "52mm",
       "image": "images/tiffen-uv-52mm.jpg",
-      "owned": true
+      "owned": true,
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "leofoto-pc-90ii",
@@ -733,7 +819,9 @@
       "mount": "1/4인치 나사",
       "image": "images/leofoto-pc-90ii.jpg",
       "owned": true,
-      "notes": "알루미늄 소재의 스마트폰 홀더. 도브테일 결합 가능."
+      "notes": "알루미늄 소재의 스마트폰 홀더. 도브테일 결합 가능.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     },
     {
       "id": "benro-bk10-ii",
@@ -742,7 +830,9 @@
       "type": "미니 삼각대/셀카봉",
       "image": "images/benro-bk10-ii.jpg",
       "owned": true,
-      "notes": "블루투스 리모컨이 포함된 스마트폰용 미니 삼각대 겸 셀카봉."
+      "notes": "블루투스 리모컨이 포함된 스마트폰용 미니 삼각대 겸 셀카봉.",
+      "usedPrice": "시세 없음",
+      "priceDate": "2026-04"
     }
   ]
 }
